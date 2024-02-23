@@ -46,6 +46,24 @@ Visit the [releases section](https://github.com/wsdfhjxc/kwin-scripts/releases) 
 
 After that, you will be able to select this file in System Settings (KWin Scripts, Install from File).
 
+### Using nix
+
+1. Open your `flake.nix` file and add the repository as an input.
+```nix
+inputs.kwin-scripts.url = "github:<username>/<repository>";
+```
+
+2. Add the package you want to include from this repository in your `nixosConfigurations`.
+
+```nix
+environment.systemPackages = with pkgs; [
+  ...
+  inputs.kwin-scripts.packages.${stdenv.system}.virtual-desktops-only-on-primary
+];
+```
+
+3. Run `nixos-rebuild switch` to apply the changes.
+
 ## Available scripts
 
 ### Simple Window Groups
