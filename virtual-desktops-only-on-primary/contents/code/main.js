@@ -1,4 +1,4 @@
-var PrimaryScreen = 0;
+var primaryScreen = 0;
 
 function bind(window) {
     window.previousScreen = window.screen;
@@ -22,10 +22,10 @@ function update(window) {
     var previousScreen = window.previousScreen;
     window.previousScreen = currentScreen;
 
-    if (currentScreen != PrimaryScreen) {
+    if (currentScreen != primaryScreen) {
         window.desktop = -1;
         print("Window " + window.windowId + " has been pinned");
-    } else if (previousScreen != PrimaryScreen) {
+    } else if (previousScreen != primaryScreen) {
         window.desktop = workspace.currentDesktop;
         print("Window " + window.windowId + " has been unpinned");
     }
@@ -37,7 +37,6 @@ function bindUpdate(window) {
 }
 
 function main() {
-    PrimaryScreen = workspace.activeScreen;
     workspace.clientList().forEach(bind);
     workspace.clientList().forEach(update);
     workspace.clientAdded.connect(bindUpdate);
