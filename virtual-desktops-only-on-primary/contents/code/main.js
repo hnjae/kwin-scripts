@@ -1,5 +1,22 @@
 var primaryScreen = 0;
 
+function updatePrimaryScreen() {
+    var dockScreens = [];
+    for (const window of workspace.clientList()) {
+        if (window.dock) {
+            dockScreens.push(window.screen);
+        }
+    }
+
+    if (dockScreens.length === 1) {
+        primaryScreen = dockScreens[0];
+        return;
+    }
+
+    primaryScreen = 0;
+    return;
+}
+
 function bind(window) {
     window.previousScreen = window.screen;
     window.screenChanged.connect(window, update);
@@ -37,6 +54,8 @@ function bindUpdate(window) {
 }
 
 function main() {
+    updatePrimaryScreen();
+
     workspace.clientList().forEach(bind);
     workspace.clientList().forEach(update);
     workspace.clientAdded.connect(bindUpdate);
