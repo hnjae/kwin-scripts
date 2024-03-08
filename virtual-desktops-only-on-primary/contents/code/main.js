@@ -13,7 +13,11 @@ function updatePrimaryScreen() {
         return;
     }
 
-    primaryScreen = 0;
+    if ((workspace.numScreens - 1) < primaryScreen) {
+        primaryScreen = 0;
+        return;
+    }
+
     return;
 }
 
@@ -58,8 +62,8 @@ function bind(window) {
 
     // NOTE:
     // re-calculate primaryScreen when every dock window appear.
-    // (kwin-script activates before dock window which prevents primaryScreen
-    // detection.)
+    // (kwin-script activates before dock window, which prevents
+    // primaryScreen detection.)
     if (window.dock) {
         updatePrimaryScreen();
     }
