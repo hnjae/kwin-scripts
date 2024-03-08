@@ -54,8 +54,15 @@ function bind(window) {
             print("Window " + window.windowId + " has been unpinned");
         }
     };
-
     window.previousScreen = window.screen;
+
+    // NOTE:
+    // re-calculate primaryScreen when every dock window appear.
+    // (kwin-script activates before dock window which prevents primaryScreen
+    // detection.)
+    if (window.dock) {
+        updatePrimaryScreen();
+    }
 
     update(window);
 
