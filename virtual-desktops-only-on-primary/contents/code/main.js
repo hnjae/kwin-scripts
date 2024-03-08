@@ -31,7 +31,10 @@ function clearDesktopBinding(window) {
     ) {
         return;
     }
-    window.desktop = workspace.currentDesktop;
+
+    if (window.desktop === -1) {
+        window.desktop = workspace.currentDesktop;
+    }
 }
 
 function bind(window) {
