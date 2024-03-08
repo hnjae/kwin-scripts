@@ -17,6 +17,19 @@ function updatePrimaryScreen() {
     return;
 }
 
+function clearDesktopBinding(window) {
+    var window = window || this;
+
+    if (
+        window.desktopWindow ||
+        window.dock ||
+        (!window.normalWindow && window.skipTaskbar)
+    ) {
+        return;
+    }
+    window.desktop = workspace.currentDesktop;
+}
+
 function bind(window) {
     var update = function (window) {
         var window = window || this;
@@ -52,6 +65,9 @@ function bind(window) {
 }
 
 function main() {
+    // clear previous binding
+    workspace.clientList().forEach(clearDesktopBinding);
+
     updatePrimaryScreen();
 
     workspace.clientList().forEach(bind);
