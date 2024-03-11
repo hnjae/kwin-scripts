@@ -8,20 +8,22 @@ function updatePrimaryScreen() {
         }
     }
 
-    if (dockScreens.length === 1) {
+    if (dockScreens.length === 1 && dockScreens[0] !== primaryScreen) {
         primaryScreen = dockScreens[0];
+        workspace.clientList().forEach(updateWindowDesktop);
         return;
     }
 
     if ((workspace.numScreens - 1) < primaryScreen) {
         primaryScreen = 0;
+        workspace.clientList().forEach(updateWindowDesktop);
         return;
     }
 
     return;
 }
 
-function clearDesktopBinding(window) {
+function clearWindowDesktopPin(window) {
     var window = window || this;
 
     if (
@@ -37,30 +39,29 @@ function clearDesktopBinding(window) {
     }
 }
 
+function updateWindowDesktop(window) {
+    var window = window || this;
+
+    if (
+        window.desktopWindow ||
+        window.dock ||
+        (!window.normalWindow && window.skipTaskbar)
+    ) {
+        return;
+    }
+
+    var currentScreen = window.screen;
+    var previousScreen = window.previousScreen;
+    window.previousScreen = currentScreen;
+
+    if (currentScreen !== primaryScreen) {
+        window.desktop = -1;
+    } else if (previousScreen !== primaryScreen) {
+        window.desktop = workspace.currentDesktop;
+    }
+}
+
 function bind(window) {
-    var update = function (window) {
-        var window = window || this;
-
-        if (
-            window.desktopWindow ||
-            window.dock ||
-            (!window.normalWindow && window.skipTaskbar)
-        ) {
-            return;
-        }
-
-        var currentScreen = window.screen;
-        var previousScreen = window.previousScreen;
-        window.previousScreen = currentScreen;
-
-        if (currentScreen != primaryScreen) {
-            window.desktop = -1;
-            print("Window " + window.windowId + " has been pinned");
-        } else if (previousScreen != primaryScreen) {
-            window.desktop = workspace.currentDesktop;
-            print("Window " + window.windowId + " has been unpinned");
-        }
-    };
     window.previousScreen = window.screen;
 
     // NOTE:
@@ -69,18 +70,19 @@ function bind(window) {
     // primaryScreen detection.)
     if (window.dock) {
         updatePrimaryScreen();
+        return;
     }
 
-    update(window);
+    updateWindowDesktop(window);
 
-    window.screenChanged.connect(window, update);
-    window.desktopChanged.connect(window, update);
+    window.screenChanged.connect(window, updateWindowDesktop);
+    window.desktopChanged.connect(window, updateWindowDesktop);
     print("Window " + window.windowId + " has been bound");
 }
 
 function main() {
     // clear previous binding
-    workspace.clientList().forEach(clearDesktopBinding);
+    workspace.clientList().forEach(clearWindowDesktopPin);
 
     updatePrimaryScreen();
 
