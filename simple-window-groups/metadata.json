@@ -1,0 +1,21 @@
+{
+    "KPlugin": {
+        "Name": "Simple Window Groups",
+        "Description": "Provides a window grouping system",
+        "Icon": "window-duplicate",
+        
+        "Authors": [
+            {
+                "Email": "wsdfhjxc@op.pl",
+                "Name": "wsdfhjxc"
+            }
+        ],
+        "Id": "simple-window-groups",
+        "Version": "1.0",
+        "License": "GPLv3",
+        "Website": "https://github.com/hnjae/kwin-scripts"
+    },
+    "X-Plasma-API": "javascript",
+    "X-Plasma-MainScript": "code/main.js",
+    "KPackageStructure": "KWin/Script"
+}

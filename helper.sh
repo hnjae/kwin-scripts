@@ -31,7 +31,7 @@ package() {
     cd "$scriptName" || exit 1
 
     local scriptVersion=$(grep -Po "Version=\K(.*)" metadata.desktop)
-    zip -r "$scriptName-$scriptVersion.kwinscript" contents metadata.desktop
+    zip -r "$scriptName-$scriptVersion.kwinscript" contents metadata.desktop metadata.json
 
     cd ..
 }
