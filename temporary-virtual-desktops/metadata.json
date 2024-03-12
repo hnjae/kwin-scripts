@@ -1,0 +1,21 @@
+{
+    "KPlugin": {
+        "Name": "Temporary Virtual Desktops",
+        "Description": "Automatically adds and removes virtual desktops",
+        "Icon": "preferences-desktop-virtual",
+        
+        "Authors": [
+            {
+                "Email": "wsdfhjxc@op.pl",
+                "Name": "wsdfhjxc"
+            }
+        ],
+        "Id": "temporary-virtual-desktops",
+        "Version": "1.0",
+        "License": "GPLv3",
+        "Website": "https://github.com/hnjae/kwin-scripts"
+    },
+    "X-Plasma-API": "javascript",
+    "X-Plasma-MainScript": "code/main.js",
+    "KPackageStructure": "KWin/Script"
+}

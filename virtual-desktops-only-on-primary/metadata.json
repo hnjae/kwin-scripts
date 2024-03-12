@@ -1,0 +1,25 @@
+{
+    "KPlugin": {
+        "Name": "Virtual Desktops Only On Primary",
+        "Description": "Switchable virtual desktops only on the primary monitor",
+        "Icon": "preferences-desktop-virtual",
+        
+        "Authors": [
+            {
+                "Email": "hnjae@outlook.com",
+                "Name": "KIM Hyunjae"
+            },
+            {
+                "Email": "wsdfhjxc@op.pl",
+                "Name": "wsdfhjxc"
+            }
+        ],
+        "Id": "virtual-desktops-only-on-primary",
+        "Version": "1.0",
+        "License": "GPLv3",
+        "Website": "https://github.com/hnjae/kwin-scripts"
+    },
+    "X-Plasma-API": "javascript",
+    "X-Plasma-MainScript": "code/main.js",
+    "KPackageStructure": "KWin/Script"
+}

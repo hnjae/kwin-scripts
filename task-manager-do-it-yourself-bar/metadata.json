@@ -1,0 +1,21 @@
+{
+    "KPlugin": {
+        "Name": "Task Manager - Do It Yourself Bar",
+        "Description": "Task manager for the Do It Yourself Bar applet",
+        "Icon": "window-duplicate",
+        
+        "Authors": [
+            {
+                "Email": "wsdfhjxc@op.pl",
+                "Name": "wsdfhjxc"
+            }
+        ],
+        "Id": "task-manager-do-it-yourself-bar",
+        "Version": "1.0",
+        "License": "GPLv3",
+        "Website": "https://github.com/hnjae/kwin-scripts"
+    },
+    "X-Plasma-API": "javascript",
+    "X-Plasma-MainScript": "code/main.js",
+    "KPackageStructure": "KWin/Script"
+}
